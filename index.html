@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raintech Hotel — Room Booking</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="page">
+  <header class="page-header">
+    <h1>Book a room</h1>
+    <p class="subtitle">Pick your dates, then choose a room to see the total.</p>
+  </header>
+
+  <section class="dates" aria-label="Booking dates">
+    <div class="field">
+      <label for="check-in">Check-in</label>
+      <input type="date" id="check-in" name="check-in">
+    </div>
+    <div class="field">
+      <label for="check-out">Check-out</label>
+      <input type="date" id="check-out" name="check-out">
+    </div>
+    <div class="field">
+      <label for="guest-filter">Guests</label>
+      <select id="guest-filter" name="guest-filter">
+        <option value="any">Any</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+      </select>
+    </div>
+  </section>
+
+  <div id="message" class="message" role="status"></div>
+
+  <section class="rooms" aria-label="Available rooms">
+    <div id="room-list" class="room-list"></div>
+  </section>
+
+  <section id="summary" class="summary" aria-label="Booking summary"></section>
+</main>
+
+<script src="data.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
