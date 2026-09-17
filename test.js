@@ -1,3 +1,5 @@
+// Minimal test runner — no dependencies, just plain assert.
+// Run with: node test.js
 
 const assert = require("assert");
 const {
@@ -65,6 +67,16 @@ test("accepts a valid future range and returns correct nights", () => {
 test("accepts today as a valid check-in date", () => {
   const result = validateBookingDates(daysFromToday(0), daysFromToday(1));
   assert.strictEqual(result.valid, true);
+});
+
+console.log("\nInvalid date input");
+test("rejects a calendar date that doesn't exist (Feb 30)", () => {
+  const result = validateBookingDates("2026-02-30", "2026-03-05");
+  assert.strictEqual(result.valid, false);
+});
+test("rejects a malformed date string", () => {
+  const result = validateBookingDates("2026-9-2", daysFromToday(5));
+  assert.strictEqual(result.valid, false);
 });
 
 console.log("\nAvailability check (bonus)");

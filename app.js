@@ -1,4 +1,4 @@
-// all calculation/validation logic are in logic.js.
+// DOM wiring only — all calculation/validation logic lives in logic.js.
 
 document.addEventListener("DOMContentLoaded", () => {
   const checkInEl = document.getElementById("check-in");
@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function setMessage(text, kind) {
     messageEl.textContent = text || "";
     messageEl.className = "message" + (kind ? ` ${kind}` : "");
+    // Errors get announced immediately by screen readers; routine info doesn't interrupt.
+    messageEl.setAttribute("role", kind === "error" ? "alert" : "status");
   }
 
   function renderRooms() {
@@ -31,6 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const minGuests = guestFilterEl.value === "any" ? 0 : Number(guestFilterEl.value);
 
     const rooms = ROOMS.filter((room) => room.maxGuests >= minGuests);
+
+    // If the guest filter just hid the currently-selected room, drop the
+    // selection rather than leaving an invisible room "selected" behind the scenes.
+    if (selectedRoomCode && !rooms.some((r) => r.code === selectedRoomCode)) {
+      selectedRoomCode = null;
+    }
+
     roomListEl.innerHTML = "";
 
     if (rooms.length === 0) {
@@ -49,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
       card.innerHTML = `
         <div class="room-info">
           <h3>${room.type} <span class="room-code">${room.code}</span></h3>
-          <p>&#8377;${room.pricePerNight.toLocaleString("en-IN")} / night &middot; Max ${room.maxGuests} guests</p>
+          <p>${formatCurrency(room.pricePerNight)} / night &middot; Max ${room.maxGuests} guests</p>
           ${!isAvailable ? '<p class="unavailable-tag">Already booked for these dates</p>' : ""}
         </div>
-        <button type="button" ${!isAvailable ? "disabled" : ""}>${isSelected ? "Selected" : "Select"}</button>
+        <button type="button" aria-pressed="${isSelected}" ${!isAvailable ? "disabled" : ""}>${isSelected ? "Selected" : "Select"}</button>
       `;
 
       card.querySelector("button").addEventListener("click", () => {
@@ -95,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const total = calculateTotalPrice(validation.nights, room.pricePerNight);
     summaryEl.innerHTML = `
       <p class="summary-room">${room.type} <span class="room-code">${room.code}</span></p>
-      <p>${validation.nights} night${validation.nights === 1 ? "" : "s"} &times; &#8377;${room.pricePerNight.toLocaleString("en-IN")}</p>
-      <p class="total">Total: &#8377;${total.toLocaleString("en-IN")}</p>
+      <p>${validation.nights} night${validation.nights === 1 ? "" : "s"} &times; ${formatCurrency(room.pricePerNight)}</p>
+      <p class="total">Total: ${formatCurrency(total)}</p>
     `;
   }
 

@@ -42,8 +42,9 @@ Uses Node's built-in `assert` — no test framework or install required.
   shown as unavailable and can't be selected.
 - **Guest filter** — filter the room list by minimum guest capacity.
 - **Unit tests** — `test.js` covers night/price calculation, date
-  validation edge cases (same-day, reversed range, past date), and the
-  availability overlap check.
+  validation edge cases (same-day, reversed range, past date, malformed
+  or nonexistent calendar dates like Feb 30), and the availability
+  overlap check.
 
 ## What I'd improve with more time
 
