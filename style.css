@@ -1,0 +1,207 @@
+:root {
+  --ink: #1e2a28;
+  --ink-soft: #52625f;
+  --paper: #f6f4ef;
+  --card: #ffffff;
+  --line: #dcd6c9;
+  --teal: #1f5f57;
+  --teal-deep: #143f3a;
+  --brass: #a97e3f;
+  --error: #a4402b;
+  --error-bg: #fbeae6;
+  --info-bg: #eef2ef;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.page-header h1 {
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 6px;
+  color: var(--teal-deep);
+}
+
+.subtitle {
+  margin: 0 0 32px;
+  color: var(--ink-soft);
+}
+
+.dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.field input:focus,
+.field select:focus,
+.room-card button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.message {
+  min-height: 20px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.message.error {
+  color: var(--error);
+  background: var(--error-bg);
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.message.info {
+  color: var(--teal-deep);
+  background: var(--info-bg);
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.room-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.room-card h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.room-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.room-code {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.room-card.selected {
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 1px var(--teal);
+}
+
+.room-card.unavailable {
+  opacity: 0.55;
+}
+
+.unavailable-tag {
+  color: var(--error);
+  margin-top: 4px !important;
+}
+
+.room-card button {
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 9px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: #fff;
+  cursor: pointer;
+}
+
+.room-card.selected button {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+}
+
+.room-card button:disabled {
+  cursor: not-allowed;
+  background: var(--card);
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.summary {
+  padding: 20px 22px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.summary:empty {
+  display: none;
+}
+
+.summary-room {
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.summary .total {
+  margin-top: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--brass);
+}
+
+@media (max-width: 520px) {
+  .dates {
+    grid-template-columns: 1fr;
+  }
+}
