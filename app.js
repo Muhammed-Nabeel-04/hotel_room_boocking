@@ -28,11 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderRooms() {
-    if (!guestFilterEl.value) {
-      roomListEl.innerHTML = '<p class="empty">Select number of guests to see available rooms.</p>';
-      return;
-    }
-
     const checkInVal = checkInEl.value;
     const checkOutVal = checkOutEl.value;
     const minGuests = guestFilterEl.value === "any" ? 0 : Number(guestFilterEl.value);
