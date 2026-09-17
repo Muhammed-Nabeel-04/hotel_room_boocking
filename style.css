@@ -27,19 +27,19 @@ body {
 .page {
   max-width: 640px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 56px 24px 80px;
 }
 
 .page-header h1 {
   font-family: Georgia, "Iowan Old Style", serif;
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 400;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--teal-deep);
 }
 
 .subtitle {
-  margin: 0 0 32px;
+  margin: 0 0 36px;
   color: var(--ink-soft);
 }
 
@@ -57,7 +57,10 @@ body {
 }
 
 .field label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
@@ -69,6 +72,12 @@ body {
   border-radius: 6px;
   background: var(--card);
   color: var(--ink);
+  transition: border-color 0.15s ease;
+}
+
+.field input:hover,
+.field select:hover {
+  border-color: #b9b09b;
 }
 
 .field input:focus,
@@ -76,6 +85,7 @@ body {
 .room-card button:focus-visible {
   outline: 2px solid var(--teal);
   outline-offset: 1px;
+  border-color: var(--teal);
 }
 
 .message {
@@ -102,7 +112,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 28px;
+  margin: 24px 0 28px;
 }
 
 .room-card {
@@ -114,12 +124,21 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.room-card:not(.unavailable):hover {
+  border-color: #b9b09b;
+  box-shadow: 0 1px 4px rgba(30, 42, 40, 0.06);
 }
 
 .room-card h3 {
   margin: 0 0 4px;
   font-size: 1rem;
   font-weight: 600;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .room-card p {
@@ -129,9 +148,10 @@ body {
 }
 
 .room-code {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--ink-soft);
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 
 .room-card.selected {
@@ -158,6 +178,12 @@ body {
   background: var(--teal);
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.room-card button:not(:disabled):hover {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
 }
 
 .room-card.selected button {
@@ -194,8 +220,10 @@ body {
 }
 
 .summary .total {
-  margin-top: 8px;
-  font-size: 1.2rem;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--brass);
 }
